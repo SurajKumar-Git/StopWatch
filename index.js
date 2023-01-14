@@ -65,20 +65,21 @@ function updateTimerInDOM() {
   hourElement.innerText = hour;
 }
 
-function stopTimer() {
-  // Stop timer interval
+function clearTimer() {
   if (timerInterval) {
     clearInterval(timerInterval);
     timerInterval = null;
   }
 }
 
+function stopTimer() {
+  // Stop timer interval
+  clearTimer();
+}
+
 function resetTimer() {
   // Stop timer interval and reset time
-  if (timerInterval) {
-    clearInterval(timerInterval);
-    timerInterval = null;
-  }
+  clearTimer();
   hh = 0;
   mm = 0;
   ss = 0;
