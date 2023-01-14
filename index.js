@@ -17,11 +17,11 @@ startBtn.onclick = startTimer;
 stopBtn.onclick = stopTimer;
 resetBtn.onclick = resetTimer;
 
-let timerInterval;
+let timerInterval = null;
 function startTimer() {
-  // Clear any already exisiting intervals, to avoid multiple time intervals. if start is clicked multiple times
-  clearInterval(timerInterval);
-  timerInterval = setInterval(incrementTimer, 1000);
+  if (!timerInterval) {
+    timerInterval = setInterval(incrementTimer, 1000);
+  }
 }
 
 function incrementTimer() {
@@ -67,12 +67,18 @@ function updateTimerInDOM() {
 
 function stopTimer() {
   // Stop timer interval
-  clearInterval(timerInterval);
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
 }
 
 function resetTimer() {
   // Stop timer interval and reset time
-  clearInterval(timerInterval);
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
   hh = 0;
   mm = 0;
   ss = 0;
